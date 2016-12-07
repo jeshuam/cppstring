@@ -1,8 +1,5 @@
 #include "util.h"
 
-#include <algorithm>
-#include <iostream>
-
 namespace string {
 
 int Count(const std::string& str, const std::string& sub) {
@@ -19,6 +16,15 @@ int Count(const std::string& str, const std::string& sub) {
   }
 
   return count;
+}
+
+bool EndsWith(const std::string& str, const std::string& suffix) {
+  if (suffix.length() == 0) {
+    return false;
+  }
+
+  auto pos = str.rfind(suffix);
+  return pos == (str.length() - suffix.length());
 }
 
 }

@@ -14,4 +14,14 @@ namespace string {
  */
 int Count(const std::string& str, const std::string& sub);
 
+/**
+ * @brief Check if `str` ends in `suffix.
+ *
+ * @param str The string to search.
+ * @param suffix The suffix to look for.
+ *
+ * @return `true` iff `str` ends with the characters in `suffix`.
+ */
+bool EndsWith(const std::string& str, const std::string& suffix);
+
 }
