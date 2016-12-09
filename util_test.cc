@@ -49,3 +49,27 @@ TEST(TestEndsWith, TestReturnsTrueWhenWholeStringMatches) {
 TEST(TestEndsWith, TestReturnsFalseWhenSuffixLongerThanString) {
   ASSERT_FALSE(string::EndsWith("suffix", "suffixsuffix"));
 }
+
+TEST(TestStartsWith, TestReturnsFalseForSuffix) {
+  ASSERT_FALSE(string::StartsWith("main.cc", ".cc"));
+}
+
+TEST(TestStartsWith, TestReturnsTrueForPrefix) {
+  ASSERT_TRUE(string::StartsWith("main.cc", "main"));
+}
+
+TEST(TestStartsWith, TestReturnsFalseWhenPrefixEmpty) {
+  ASSERT_FALSE(string::StartsWith("main.cc", ""));
+}
+
+TEST(TestStartsWith, TestReturnsFalseWhenStrEmpty) {
+  ASSERT_FALSE(string::StartsWith("", "prefix"));
+}
+
+TEST(TestStartsWith, TestReturnsTrueWhenWholeStringMatches) {
+  ASSERT_TRUE(string::StartsWith("prefix", "prefix"));
+}
+
+TEST(TestStartsWith, TestReturnsFalseWhenPrefixLongerThanString) {
+  ASSERT_FALSE(string::StartsWith("prefix", "prefixprefix"));
+}

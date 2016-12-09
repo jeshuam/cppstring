@@ -23,8 +23,15 @@ bool EndsWith(const std::string& str, const std::string& suffix) {
     return false;
   }
 
-  auto pos = str.rfind(suffix);
-  return pos == (str.length() - suffix.length());
+  return str.rfind(suffix) == (str.length() - suffix.length());
+}
+
+bool StartsWith(const std::string& str, const std::string& prefix) {
+  if (prefix.length() == 0) {
+    return false;
+  }
+
+  return str.find(prefix) == 0;
 }
 
 }
