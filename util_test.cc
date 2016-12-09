@@ -26,6 +26,22 @@ TEST(TestCount, TestIsCaseSensitive) {
   ASSERT_EQ(0, string::Count("SAS", "sas"));
 }
 
+TEST(TestIn, TestReturnsFalseForEmptySourceString) {
+  ASSERT_FALSE(string::In("", "search"));
+}
+
+TEST(TestIn, TestReturnsFalseForEmptySearchString) {
+  ASSERT_FALSE(string::In("search", ""));
+}
+
+TEST(TestIn, TestReturnsSingleMatch) {
+  ASSERT_TRUE(string::In("search", "ea"));
+}
+
+TEST(TestIn, TestReturnsMultipleMatches) {
+  ASSERT_TRUE(string::In("searchea", "ea"));
+}
+
 TEST(TestEndsWith, TestReturnsTrueForSuffix) {
   ASSERT_TRUE(string::EndsWith("main.cc", ".cc"));
 }

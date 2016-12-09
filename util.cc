@@ -18,6 +18,14 @@ int Count(const std::string& str, const std::string& sub) {
   return count;
 }
 
+bool In(const std::string& str, const std::string& needle) {
+  if (needle.length() == 0) {
+    return false;
+  }
+
+  return str.find(needle) != std::string::npos;
+}
+
 bool EndsWith(const std::string& str, const std::string& suffix) {
   if (suffix.length() == 0) {
     return false;

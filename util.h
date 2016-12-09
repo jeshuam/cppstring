@@ -15,6 +15,16 @@ namespace string {
 int Count(const std::string& str, const std::string& sub);
 
 /**
+ * @brief Check whether a needle is within a haystack.
+ *
+ * @param str The string to search.
+ * @param needle The needle to search for.
+ *
+ * @return `true` iff `needle` is within `str`.
+ */
+bool In(const std::string& str, const std::string& needle);
+
+/**
  * @brief Check if `str` ends in `suffix`.
  *
  * @param str The string to search.
