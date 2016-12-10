@@ -61,11 +61,9 @@ char* _WriteToFormatBuffer(
 	return buffer;
 }
 
-}
+typedef std::function<const internal::PrintableAny(const std::string&)> TagFn;
 
-std::string Format(
-  const std::string& fmt,
-  const std::unordered_map<std::string, internal::PrintableAny>& map) {
+std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 	// We have to be fast, so just scan through the string until we find a set of
 	// matching {}.
 	std::stringstream result;
@@ -113,7 +111,7 @@ std::string Format(
 
 		// Write the typed content to the buffer.
 		char last_char = type.back();
-		const internal::PrintableAny& val = map.at(tag);
+		const internal::PrintableAny& val = get_tag(tag);
 		switch (last_char) {
 		// String type.
 		case 's':
@@ -203,6 +201,16 @@ std::string Format(
 	}
 
 	return result.str();
+}
+
+}
+
+std::string Format(
+  const std::string& fmt,
+  const std::unordered_map<std::string, internal::PrintableAny>& map) {
+	return _Format(fmt, [&map](const std::string & s) {
+		return map.at(s);
+	});
 }
 
 }
