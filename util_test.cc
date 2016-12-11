@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include "util.h"
+
+#include <gtest/gtest.h>
 
 TEST(TestCount, TestReturns0ForEmptySourceString) {
   ASSERT_EQ(0, string::Count("", "search"));
@@ -88,4 +88,73 @@ TEST(TestStartsWith, TestReturnsTrueWhenWholeStringMatches) {
 
 TEST(TestStartsWith, TestReturnsFalseWhenPrefixLongerThanString) {
   ASSERT_FALSE(string::StartsWith("prefix", "prefixprefix"));
+}
+
+TEST(TestTrim, TestTrimWorksWithSingleToken) {
+  ASSERT_STREQ("abc", string::Trim("|abc|", "|").c_str());
+}
+
+TEST(TestTrim, TestTrimWorksWithMultipleTokens) {
+  ASSERT_STREQ("abc", string::Trim("|abc,", "|,").c_str());
+}
+
+TEST(TestTrim, TestTrimWorksWithManyJoinedTokensOnEachSide) {
+  ASSERT_STREQ("abc", string::Trim(",|abc,|", "|,").c_str());
+}
+
+TEST(TestTrim, TestTrimWithOnlyTokensReturnsEmptyString) {
+  ASSERT_STREQ("", string::Trim(",|,|", "|,").c_str());
+}
+
+TEST(TestTrimRight, TestTrimRightWorksWithSingleToken) {
+  ASSERT_STREQ("|abc", string::TrimRight("|abc|", "|").c_str());
+}
+
+TEST(TestTrimRight, TestTrimRightWorksWithMultipleTokens) {
+  ASSERT_STREQ("|abc", string::TrimRight("|abc,", "|,").c_str());
+}
+
+TEST(TestTrimRight, TestTrimRightWorksWithManyJoinedTokensOnEachSide) {
+  ASSERT_STREQ(",|abc", string::TrimRight(",|abc,|", "|,").c_str());
+}
+
+TEST(TestTrimRight, TestTrimRightWithOnlyTokensReturnsEmptyString) {
+  ASSERT_STREQ("", string::TrimRight(",|,|", "|,").c_str());
+}
+
+TEST(TestTrimLeft, TestTrimLeftWorksWithSingleToken) {
+  ASSERT_STREQ("abc|", string::TrimLeft("|abc|", "|").c_str());
+}
+
+TEST(TestTrimLeft, TestTrimLeftWorksWithMultipleTokens) {
+  ASSERT_STREQ("abc,", string::TrimLeft("|abc,", "|,").c_str());
+}
+
+TEST(TestTrimLeft, TestTrimLeftWorksWithManyJoinedTokensOnEachSide) {
+  ASSERT_STREQ("abc,|", string::TrimLeft(",|abc,|", "|,").c_str());
+}
+
+TEST(TestTrimLeft, TestTrimLeftWithOnlyTokensReturnsEmptyString) {
+  ASSERT_STREQ("", string::TrimLeft(",|,|", "|,").c_str());
+}
+
+TEST(TestSimple, TestCapitalize) {
+  ASSERT_STREQ("Abc", string::Capitalize("Abc").c_str());
+  ASSERT_STREQ("Abc", string::Capitalize("abc").c_str());
+  ASSERT_STREQ(";bc", string::Capitalize(";bc").c_str());
+  ASSERT_STREQ("", string::Capitalize("").c_str());
+}
+
+TEST(TestSimple, TestToLower) {
+  ASSERT_STREQ("abc", string::ToLower("aBC").c_str());
+  ASSERT_STREQ("abc", string::ToLower("ABC").c_str());
+  ASSERT_STREQ(";bc", string::ToLower(";BC").c_str());
+  ASSERT_STREQ("", string::ToLower("").c_str());
+}
+
+TEST(TestSimple, TestToUpper) {
+  ASSERT_STREQ("ABC", string::ToUpper("Abc").c_str());
+  ASSERT_STREQ("ABC", string::ToUpper("abc").c_str());
+  ASSERT_STREQ(";BC", string::ToUpper(";bc").c_str());
+  ASSERT_STREQ("", string::ToUpper("").c_str());
 }

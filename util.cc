@@ -1,5 +1,7 @@
 #include "util.h"
 
+#include <algorithm>
+
 namespace string {
 
 int Count(const std::string& str, const std::string& sub) {
@@ -40,6 +42,50 @@ bool StartsWith(const std::string& str, const std::string& prefix) {
   }
 
   return str.find(prefix) == 0;
+}
+
+std::string Trim(const std::string& str, const std::string& tokens) {
+  return TrimRight(TrimLeft(str, tokens), tokens);
+}
+
+std::string TrimRight(const std::string& str, const std::string& tokens) {
+  auto last_non_token = str.find_last_not_of(tokens);
+  if (last_non_token == std::string::npos) {
+    return "";
+  }
+
+  return str.substr(0, str.size() - (str.size() - last_non_token) + 1);
+}
+
+std::string TrimLeft(const std::string& str, const std::string& tokens) {
+  auto first_non_token = str.find_first_not_of(tokens);
+  if (first_non_token == std::string::npos) {
+    return "";
+  }
+
+  return str.substr(first_non_token);
+}
+
+std::string Capitalize(const std::string& str) {
+  if (str.empty()) {
+    return "";
+  }
+
+  std::string result(str);
+  result[0] = ::toupper(result[0]);
+  return result;
+}
+
+std::string ToLower(const std::string& str) {
+  std::string result(str);
+  std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+  return result;
+}
+
+std::string ToUpper(const std::string& str) {
+  std::string result(str);
+  std::transform(result.begin(), result.end(), result.begin(), ::toupper);
+  return result;
 }
 
 }  // namespace string

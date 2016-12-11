@@ -4,12 +4,16 @@ build = dict(
   string = dict(
     type = 'c++/library',
     srcs = [
+      'constants.cc',
       'format.cc',
+      'split.cc',
       'util.cc',
     ],
 
     hdrs = [
+      'constants.h',
       'format.h',
+      'split.h',
       'util.h',
     ],
 
@@ -23,6 +27,7 @@ build = dict(
     type = 'c++/test',
     srcs = [
       'format_test.cc',
+      'split_test.cc',
       'util_test.cc',
     ],
 

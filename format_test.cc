@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include "format.h"
+
+#include <gtest/gtest.h>
 
 ///
 /// Happy Cases.

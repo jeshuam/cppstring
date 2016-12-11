@@ -51,4 +51,71 @@ bool EndsWith(const std::string& str, const std::string& suffix);
  */
 bool StartsWith(const std::string& str, const std::string& prefix);
 
+/**
+ * @brief      Trim all characters in `tokens` from either side of `str`.
+ *
+ * @param[in]  str     The string to trim.
+ * @param[in]  tokens  The tokens to trim.
+ *
+ * @return     A copy of `str` with all characters in `tokens` removed.
+ * @see        TrimRight
+ * @see        TrimLeft
+ */
+std::string Trim(const std::string& str, const std::string& tokens);
+
+/**
+ * @brief      Trim all characters in `tokens` from the right side of `str`.
+ *
+ * @param[in]  str     The string to trim.
+ * @param[in]  tokens  The tokens to trim.
+ *
+ * @return     A copy of `str` with all characters in `tokens` removed from the
+ *             right.
+ * @see        Trim
+ * @see        TrimLeft
+ */
+std::string TrimRight(const std::string& str, const std::string& tokens);
+
+/**
+ * @brief      Trim all characters in `tokens` from the left side of `str`.
+ *
+ * @param[in]  str     The string to trim.
+ * @param[in]  tokens  The tokens to trim.
+ *
+ * @return     A copy of `str` with all characters in `tokens` removed from the
+ *             left.
+ * @see        Trim
+ * @see        TrimRight
+ */
+std::string TrimLeft(const std::string& str, const std::string& tokens);
+
+/**
+ * @brief      Capitalize the given string.
+ *
+ * @param[in]  str   The string to capitalize.
+ *
+ * @return     A version of the string with the first letter capitalized.
+ */
+std::string Capitalize(const std::string& str);
+
+/**
+ * @brief      Convert the given string to lowercase.
+ *
+ * @param[in]  str   The string to convert.
+ *
+ * @return     A version of the string with all letters in their lowercase form.
+ * @see        ToUpper
+ */
+std::string ToLower(const std::string& str);
+
+/**
+ * @brief      Convert the given string to uppercase.
+ *
+ * @param[in]  str   The string to convert.
+ *
+ * @return     A version of the string with all letters in their uppercase form.
+ * @see        ToLower
+ */
+std::string ToUpper(const std::string& str);
+
 }  // namespace string
