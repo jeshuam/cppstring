@@ -5,58 +5,58 @@
 ///
 /// Happy Cases.
 ///
-TEST(TestFormat, TestFormatWithSimpleMap) {
-	auto result = string::Format("{abc} {def}", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapWithSimpleMap) {
+	auto result = string::FormatMap("{abc} {def}", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("abc def", result.c_str());
 }
 
-TEST(TestFormat, TestFormatWithNoTags) {
-	auto result = string::Format("xxx xxx", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapWithNoTags) {
+	auto result = string::FormatMap("xxx xxx", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("xxx xxx", result.c_str());
 }
 
-TEST(TestFormat, TestFormatWithExtraCharsAtStartAndEnd) {
-	auto result = string::Format("xxx {abc} {def} xxx", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapWithExtraCharsAtStartAndEnd) {
+	auto result = string::FormatMap("xxx {abc} {def} xxx", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("xxx abc def xxx", result.c_str());
 }
 
-TEST(TestFormat, TestFormatWithExtraCharsAtEnd) {
-	auto result = string::Format("{abc} {def} xxx", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapWithExtraCharsAtEnd) {
+	auto result = string::FormatMap("{abc} {def} xxx", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("abc def xxx", result.c_str());
 }
 
-TEST(TestFormat, TestFormatWithExtraCharsAtStart) {
-	auto result = string::Format("xxx {abc} {def}", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapWithExtraCharsAtStart) {
+	auto result = string::FormatMap("xxx {abc} {def}", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("xxx abc def", result.c_str());
 }
 
-TEST(TestFormat, TestFormatWithExtraCharsInMiddle) {
-	auto result = string::Format("{abc} xxx {def}", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapWithExtraCharsInMiddle) {
+	auto result = string::FormatMap("{abc} xxx {def}", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("abc xxx def", result.c_str());
 }
 
-TEST(TestFormat, TestFormatSpecifyTypeDirectly) {
-	auto result = string::Format("{abc} xxx {def:s}", {{"abc", "abc"}, {"def", "def"}});
+TEST(TestFormatMap, TestFormatMapSpecifyTypeDirectly) {
+	auto result = string::FormatMap("{abc} xxx {def:s}", {{"abc", "abc"}, {"def", "def"}});
 	ASSERT_STREQ("abc xxx def", result.c_str());
 }
 
-TEST(TestFormat, TestFormatInt) {
-	auto result = string::Format("{abc} xxx {def:d}", {{"abc", "abc"}, {"def", 10}});
+TEST(TestFormatMap, TestFormatMapInt) {
+	auto result = string::FormatMap("{abc} xxx {def:d}", {{"abc", "abc"}, {"def", 10}});
 	ASSERT_STREQ("abc xxx 10", result.c_str());
 }
 
-TEST(TestFormat, TestFormatIntComplex) {
-	auto result = string::Format("{abc} xxx {def:010d}", {{"abc", "abc"}, {"def", 10}});
+TEST(TestFormatMap, TestFormatMapIntComplex) {
+	auto result = string::FormatMap("{abc} xxx {def:010d}", {{"abc", "abc"}, {"def", 10}});
 	ASSERT_STREQ("abc xxx 0000000010", result.c_str());
 }
 
-TEST(TestFormat, TestFormatFloat) {
-	auto result = string::Format("{abc} xxx {def:f}", {{"abc", "abc"}, {"def", 10.2222f}});
+TEST(TestFormatMap, TestFormatMapFloat) {
+	auto result = string::FormatMap("{abc} xxx {def:f}", {{"abc", "abc"}, {"def", 10.2222f}});
 	ASSERT_STREQ("abc xxx 10.222200", result.c_str());
 }
 
-TEST(TestFormat, TestFormatFloatComplex) {
-	auto result = string::Format("{abc} xxx {def:.3f}", {{"abc", "abc"}, {"def", 10.2564f}});
+TEST(TestFormatMap, TestFormatMapFloatComplex) {
+	auto result = string::FormatMap("{abc} xxx {def:.3f}", {{"abc", "abc"}, {"def", 10.2564f}});
 	ASSERT_STREQ("abc xxx 10.256", result.c_str());
 }
 
@@ -68,30 +68,30 @@ std::ostream& operator<<(std::ostream& os, const ComplexObject& o) {
 	return os << "(" << o.x << ", " << o.y << ")";
 }
 
-TEST(TestFormat, TestFormatComplexObject) {
-	auto result = string::Format("{abc}", {{"abc", ComplexObject{1, 2}}});
+TEST(TestFormatMap, TestFormatMapComplexObject) {
+	auto result = string::FormatMap("{abc}", {{"abc", ComplexObject{1, 2}}});
 	ASSERT_STREQ("(1, 2)", result.c_str());
 }
 
-TEST(TestFormat, TestFormatShowLeftBrackets) {
-	ASSERT_STREQ("{{abc", string::Format("{{abc", {}).c_str());
+TEST(TestFormatMap, TestFormatMapShowLeftBrackets) {
+	ASSERT_STREQ("{{abc", string::FormatMap("{{abc", {}).c_str());
 }
 
-TEST(TestFormat, TestFormatShowRightBrackets) {
-	ASSERT_STREQ("abc}}", string::Format("abc}}", {}).c_str());
+TEST(TestFormatMap, TestFormatMapShowRightBrackets) {
+	ASSERT_STREQ("abc}}", string::FormatMap("abc}}", {}).c_str());
 }
 
-TEST(TestFormat, TestFormatShowBothBrackets) {
-	ASSERT_STREQ("{{abc}}", string::Format("{{abc}}", {}).c_str());
+TEST(TestFormatMap, TestFormatMapShowBothBrackets) {
+	ASSERT_STREQ("{{abc}}", string::FormatMap("{{abc}}", {}).c_str());
 }
 
-TEST(TestFormat, TestFormatShowMixedBrackets) {
-	ASSERT_STREQ("{{abc}}", string::Format("{{{abc}}}", {{"abc", "abc"}}).c_str());
+TEST(TestFormatMap, TestFormatMapShowMixedBrackets) {
+	ASSERT_STREQ("{{abc}}", string::FormatMap("{{{abc}}}", {{"abc", "abc"}}).c_str());
 }
 
-TEST(TestFormat, TestFormatWithAllTypes) {
+TEST(TestFormatMap, TestFormatMapWithAllTypes) {
 	auto obj = ComplexObject{1, 2};
-	auto result = string::Format(
+	auto result = string::FormatMap(
 	                "{obj};"
 	                "{s:s};"
 	                "{c:c};"
@@ -143,14 +143,14 @@ TEST(TestFormat, TestFormatWithAllTypes) {
 ///
 /// Error Cases
 ///
-TEST(TestFormat, TestFormatWithMismatchedLeftBrackets) {
-	ASSERT_THROW(string::Format("{", {}), std::invalid_argument);
+TEST(TestFormatMap, TestFormatMapWithMismatchedLeftBrackets) {
+	ASSERT_THROW(string::FormatMap("{", {}), std::invalid_argument);
 }
 
-TEST(TestFormat, TestFormatWithMismatchedRightBrackets) {
-	ASSERT_THROW(string::Format("{abc}}", {{"abc", "abc"}}), std::invalid_argument);
+TEST(TestFormatMap, TestFormatMapWithMismatchedRightBrackets) {
+	ASSERT_THROW(string::FormatMap("{abc}}", {{"abc", "abc"}}), std::invalid_argument);
 }
 
-TEST(TestFormat, TestFormatWithInvalidTagContent) {
-	ASSERT_THROW(string::Format("{ {}", {}), std::invalid_argument);
+TEST(TestFormatMap, TestFormatMapWithInvalidTagContent) {
+	ASSERT_THROW(string::FormatMap("{ {}", {}), std::invalid_argument);
 }

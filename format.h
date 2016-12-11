@@ -36,7 +36,7 @@ PrintableAny::PrintableAny(const char t[]);
 //   fmt has incomplete tags.
 //   fmt has char not found in map.
 //   fmt has char with type error.
-std::string Format(
+std::string FormatMap(
   const std::string& fmt,
   const std::unordered_map<std::string, internal::PrintableAny>& args);
 

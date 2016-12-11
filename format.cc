@@ -213,7 +213,7 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 
 }
 
-std::string Format(
+std::string FormatMap(
   const std::string& fmt,
   const std::unordered_map<std::string, internal::PrintableAny>& map) {
 	return _Format(fmt, [&map](const std::string & s) {
