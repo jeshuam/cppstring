@@ -1,7 +1,6 @@
 #include "format.h"
 
 #include <sstream>
-#include <iostream>
 
 #include <string.h>
 

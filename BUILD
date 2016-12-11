@@ -1,30 +1,36 @@
-string: {
-  type: c++/library
-  srcs: [
-    "format.cc",
-    "util.cc",
-  ]
+import json
 
-  hdrs: [
-    "format.h",
-    "util.h",
-  ]
+build = dict(
+  string = dict(
+    type = 'c++/library',
+    srcs = [
+      'format.cc',
+      'util.cc',
+    ],
 
-  deps: [
-    "//third_party/boost/any",
-    "//third_party/gflags",
-  ]
-}
+    hdrs = [
+      'format.h',
+      'util.h',
+    ],
 
-string_test: {
-  type: c++/test
-  srcs: [
-    "format_test.cc",
-    "util_test.cc",
-  ]
+    deps = [
+      '//third_party/boost/any',
+      '//third_party/gflags',
+    ],
+  ),
 
-  deps: [
-    ":string",
-    "//third_party/googletest:main",
-  ]
-}
+  string_test = dict(
+    type = 'c++/test',
+    srcs = [
+      'format_test.cc',
+      'util_test.cc',
+    ],
+
+    deps = [
+      ':string',
+      '//third_party/googletest:main',
+    ],
+  )
+)
+
+print(json.dumps(build))
