@@ -14,6 +14,8 @@ DEFINE_uint32(cppstring_format_buffer_bytes, 1024,
 
 namespace string {
 
+#ifdef OS_LINUX
+
 namespace internal {
 
 template <>
@@ -23,6 +25,8 @@ PrintableAny::PrintableAny(const char t[])
       }) {}
 
 }  // namespace internal
+
+#endif  // OS_LINUX
 
 namespace {
 
@@ -47,9 +51,10 @@ char* _WriteToFormatBuffer(char* buffer, const std::string& fmt,
   int n = snprintf(buffer, FLAGS_cppstring_format_buffer_bytes, fmt.c_str(),
                    boost::any_cast<T>(val));
 
-  if (n < 0) {
+  if (n < 0 || n >= FLAGS_cppstring_format_buffer_bytes) {
     std::cerr << "Failed to write format to buffer: " << fmt << ", "
               << boost::any_cast<T>(val);
+    throw std::invalid_argument("Format too long for buffer.");
   }
 
   return buffer;

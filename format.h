@@ -17,18 +17,23 @@ namespace internal {
 // Wrapper around boost::any which allows it to be printed.
 struct PrintableAny : boost::any {
   template <typename T>
-  PrintableAny(T t)
-      : boost::any(t), printer_([](std::ostream& os, const boost::any& a) {
-          os << boost::any_cast<const T&>(a);
-        }) {}
+  PrintableAny(T t) : boost::any(t) {
+    printer_ = [](std::ostream& os, const boost::any& a) {
+      os << boost::any_cast<const T&>(a);
+    };
+  }
 
   std::function<void(std::ostream&, const boost::any&)> printer_;
 };
+
+#ifdef OS_LINUX
 
 // Add a custom overwrite for char arrays, to allow users to pass raw strings as
 // arguments.
 template <>
 PrintableAny::PrintableAny(const char t[]);
+
+#endif  // OS_LINUX
 
 }  // namespace internal
 

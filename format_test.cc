@@ -1,6 +1,9 @@
 #include "format.h"
 
+#include <gflags/gflags.h>
 #include <gtest/gtest.h>
+
+DECLARE_uint32(cppstring_format_buffer_bytes);
 
 ///
 /// Happy Cases.
@@ -8,6 +11,13 @@
 TEST(TestFormatMap, TestFormatMapWithSimpleMap) {
   auto result =
       string::FormatMap("{abc} {def}", {{"abc", "abc"}, {"def", "def"}});
+  ASSERT_STREQ("abc def", result.c_str());
+}
+
+TEST(TestFormatMap, TestFormatMapWithCharArray) {
+  char abc[] = "abc";
+  char def[] = "def";
+  auto result = string::FormatMap("{abc} {def}", {{"abc", abc}, {"def", def}});
   ASSERT_STREQ("abc def", result.c_str());
 }
 
@@ -184,4 +194,19 @@ TEST(TestFormatMap, TestFormatMapWithMismatchedRightBrackets) {
 
 TEST(TestFormatMap, TestFormatMapWithInvalidTagContent) {
   ASSERT_THROW(string::FormatMap("{ {}", {}), std::invalid_argument);
+}
+
+TEST(TestFormatMap, TestFormatMapWithInvalidType) {
+  ASSERT_THROW(string::FormatMap("{abc:W}", {{"abc", "ABC"}}),
+               std::invalid_argument);
+}
+
+TEST(TestFormatMap, TestFormatMapWithVeryLongFormat) {
+  auto old_val = FLAGS_cppstring_format_buffer_bytes;
+  FLAGS_cppstring_format_buffer_bytes = 1;
+
+  ASSERT_THROW(string::FormatMap("{abc:d}", {{"abc", 1000000}}),
+               std::invalid_argument);
+
+  FLAGS_cppstring_format_buffer_bytes = old_val;
 }
