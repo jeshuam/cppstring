@@ -21,7 +21,8 @@ PrintableAny::PrintableAny(const char t[])
     : boost::any(t), printer_([](std::ostream& os, const boost::any& a) {
         os << boost::any_cast<const char*>(a);
       }) {}
-}
+
+}  // namespace internal
 
 namespace {
 
@@ -73,6 +74,7 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 #endif
 
   size_t start = fmt.find("{"), last_end = -1;
+  size_t next_tag_index = 0;  // used for Format(), not FormatMap()
   while (start != std::string::npos) {
     // If the immediate next character is a {, then this bracket has been
     // escaped and we can ignore it; just move on.
@@ -103,6 +105,12 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
     if (In(tag_raw, ":")) {
       type = "%" + tag_raw.substr(tag_raw.find(":") + 1);
       tag = tag_raw.substr(0, tag_raw.length() - type.length());
+    }
+
+    // If the tag is empty, the use the next index.
+    if (tag.empty()) {
+      tag = std::to_string(next_tag_index);
+      next_tag_index++;
     }
 
     // If the tag contains a { character, that is bad.
@@ -204,12 +212,19 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 
   return result.str();
 }
-}
+
+}  // namespace
 
 std::string FormatMap(
     const std::string& fmt,
     const std::unordered_map<std::string, internal::PrintableAny>& map) {
   return _Format(fmt, [&map](const std::string& s) { return map.at(s); });
+}
+
+std::string Format(const std::string& fmt,
+                   const std::vector<internal::PrintableAny>& args) {
+  return _Format(
+      fmt, [&args](const std::string& s) { return args.at(std::stoi(s)); });
 }
 
 }  // namespace string

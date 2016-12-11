@@ -154,6 +154,22 @@ TEST(TestFormatMap, TestFormatMapWithAllTypes) {
 #endif
 }
 
+TEST(TestFormat, TestFormatWorksWithTagsSet) {
+  ASSERT_STREQ("1x1", string::Format("{0}{1}{0}", {1, "x"}).c_str());
+}
+
+TEST(TestFormat, TestFormatWorksWithTagsNotSet) {
+  ASSERT_STREQ("1x2", string::Format("{}{}{}", {1, "x", 2}).c_str());
+}
+
+TEST(TestFormat, TestFormatWorksWithInconsistentTagging) {
+  ASSERT_STREQ("12x", string::Format("{}{2}{}", {1, "x", 2}).c_str());
+}
+
+TEST(TestFormat, TestFormatWorksWhenSkippingTags) {
+  ASSERT_STREQ("12", string::Format("{0}{2}", {1, "x", 2}).c_str());
+}
+
 ///
 /// Error Cases
 ///
