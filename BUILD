@@ -30,7 +30,9 @@ build = dict(
       ':string',
       '//third_party/googletest:main',
     ],
-  )
+  ),
+
+  doc = dict(type = 'doxygen'),
 )
 
 print(json.dumps(build))
