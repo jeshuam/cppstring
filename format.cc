@@ -1,6 +1,7 @@
 #include "format.h"
 
 #include <sstream>
+#include <memory>
 
 #include <string.h>
 
@@ -67,6 +68,17 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 	// matching {}.
 	std::stringstream result;
 
+	// Allocate space for the buffer. On Windows, this has to be an actually
+	// allocated array, so use a unique_ptr to make sure it is destroyed. On other
+	// OSes, you can just use a variable sized char array.
+#ifdef OS_WINDOWS
+	std::unique_ptr<char[]> buffer_store(
+			new char[FLAGS_cppstring_format_buffer_bytes]);
+	char* buffer = buffer_store.get();
+#else
+	char buffer[FLAGS_cppstring_format_buffer_bytes];
+#endif
+
 	size_t start = fmt.find("{"), last_end = -1;
 	while (start != std::string::npos) {
 		// If the immediate next character is a {, then this bracket has been
@@ -104,9 +116,6 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 		if (tag_raw.find("{") != std::string::npos) {
 			throw std::invalid_argument("Invalid tag contents.");
 		}
-
-		// Try to substitute this tag in. If it isn't found, throw an exception.
-		char buffer[FLAGS_cppstring_format_buffer_bytes];
 
 		// Write the typed content to the buffer.
 		char last_char = type.back();

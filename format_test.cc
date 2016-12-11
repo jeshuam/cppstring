@@ -115,6 +115,18 @@ TEST(TestFormat, TestFormatWithAllTypes) {
 		{"DD", 1.34L},
 	});
 
+#ifdef OS_WINDOWS
+	ASSERT_STREQ(
+		"(1, 2);"
+		"s;"
+		"c;"
+		"0000000000000000;"
+		"10;12;a;A;10;100;1000;"
+		"20;20;20;"
+		"1.34;1.34;0x1.570a3e0000000p+0;0X1.570A3E0000000P+0;1.340000e+00;1.340000E+00;1.340000;1.340000;"
+		"1.340000;1.340000;",
+		result.c_str());
+#elif
 	ASSERT_STREQ(
 	  "(1, 2);"
 	  "s;"
@@ -125,6 +137,7 @@ TEST(TestFormat, TestFormatWithAllTypes) {
 	  "1.34;1.34;0x1.570a3ep+0;0X1.570A3EP+0;1.340000e+00;1.340000E+00;1.340000;1.340000;"
 	  "1.340000;1.340000;",
 	  result.c_str());
+#endif
 }
 
 ///
