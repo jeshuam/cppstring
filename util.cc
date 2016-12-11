@@ -42,4 +42,4 @@ bool StartsWith(const std::string& str, const std::string& prefix) {
   return str.find(prefix) == 0;
 }
 
-}
+}  // namespace string

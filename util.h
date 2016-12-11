@@ -44,4 +44,4 @@ bool EndsWith(const std::string& str, const std::string& suffix);
  */
 bool StartsWith(const std::string& str, const std::string& prefix);
 
-}
+}  // namespace string
