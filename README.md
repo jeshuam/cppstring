@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/jeshuam/cppstring.svg?branch=master)](https://travis-ci.org/jeshuam/cppstring)
 [![Documentation](https://codedocs.xyz/jeshuam/cppstring.svg)](https://codedocs.xyz/jeshuam/cppstring/)
 
-To run coverage on Windows:
+# cppstring: A C++ string library
+`cppstring` is a small, simple C++ string library, with most of the functions inspired by Python.
 
-$ jbuild -c debug --cc_compiler="cl.exe" build :string_test
-$ OpenCppCoverage.exe -v --modules 'string_test' --sources 'cppstring' --excluded_sources '.jbuild' --excluded_sources 'third_party' --excluded_sources '*_test.cc' -- ./bin/debug/string_test.exe
+See the `string::` namespace in the documentation for more information.
