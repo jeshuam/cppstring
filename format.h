@@ -16,6 +16,8 @@ namespace internal {
 
 // Wrapper around boost::any which allows it to be printed.
 struct PrintableAny : boost::any {
+  PrintableAny() : boost::any() {}
+
   template <typename T>
   PrintableAny(T t) : boost::any(t) {
     printer_ = [](std::ostream& os, const boost::any& a) {
