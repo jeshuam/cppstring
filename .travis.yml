@@ -4,3 +4,4 @@ before_install:
 
 install: go install -u github.com/jeshuam/jbuild
 script: ${GO_PATH}/jbuild test //...
+language: c++,
