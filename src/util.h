@@ -118,4 +118,21 @@ std::string ToLower(const std::string& str);
  */
 std::string ToUpper(const std::string& str);
 
+/**
+ * @brief      Replace all occurrences of `old` with `replacement` in `str`.
+ *
+ * @details    At most `count` occurrences of `old` will be replaced by
+ *             `replacement` in `str`. This replacement will occur from left
+ *             to right.
+ *
+ * @param[in]  str           The string to replace the contents of.
+ * @param[in]  old           The string to replace.
+ * @param[in]  replacement   The string to replace it with.
+ * @param[in]  count         The number of replacements to make.
+ *
+ * @return     A new string with the replacement performed.
+ */
+std::string Replace(const std::string& str, const std::string& old,
+                    const std::string& replacement, int count = -1);
+
 }  // namespace string

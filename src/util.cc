@@ -88,4 +88,24 @@ std::string ToUpper(const std::string& str) {
   return result;
 }
 
+std::string Replace(const std::string& str, const std::string& old,
+                    const std::string& replacement, int count) {
+  // Keep finding copies until we reach the end.
+  std::string str_replace(str);
+  size_t start = str_replace.find(old), replacements = 0;
+  while (start != std::string::npos) {
+    // Make sure we aren't over our limit.
+    if (count >= 0 && replacements >= count) {
+      break;
+    }
+
+    // Do the replacement.
+    str_replace.replace(start, old.size(), replacement);
+    start = str_replace.find(old, start + 1);
+    replacements++;
+  }
+
+  return str_replace;
+}
+
 }  // namespace string

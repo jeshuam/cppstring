@@ -158,3 +158,23 @@ TEST(TestSimple, TestToUpper) {
   ASSERT_STREQ(";BC", string::ToUpper(";bc").c_str());
   ASSERT_STREQ("", string::ToUpper("").c_str());
 }
+
+TEST(TestReplace, TestReplaceSingleReplacementOfWholeString) {
+  ASSERT_STREQ("def", string::Replace("abc", "abc", "def").c_str());
+}
+
+TEST(TestReplace, TestReplaceMultipleReplacementOfWholeString) {
+  ASSERT_STREQ("defdef", string::Replace("abcabc", "abc", "def").c_str());
+}
+
+TEST(TestReplace, TestReplaceLimitNumberOfReplacements) {
+  ASSERT_STREQ("defabc", string::Replace("abcabc", "abc", "def", 1).c_str());
+}
+
+TEST(TestReplace, TestReplaceDoesNoReplacementsWhenCountIs0) {
+  ASSERT_STREQ("abcabc", string::Replace("abcabc", "abc", "def", 0).c_str());
+}
+
+TEST(TestReplace, TestReplaceDoesNotReplaceOveralappingReplacements) {
+  ASSERT_STREQ("defba", string::Replace("ababa", "aba", "def").c_str());
+}
