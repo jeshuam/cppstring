@@ -125,4 +125,22 @@ std::string FormatMap(
 std::string Format(const std::string& fmt,
                    const std::vector<internal::PrintableAny>& args);
 
+/**
+ * @brief      Trim any formatting tags from the given string.
+ *
+ * @param[in]  fmt   The format string to trim.
+ *
+ * @return     A trimmed version of the given format string.
+ */
+std::string FormatTrimTags(const std::string& fmt);
+
+/**
+ * @brief      Check whether the given format has any tags in it.
+ *
+ * @param[in]  fmt   The format to check.
+ *
+ * @return     `true` iff `fmt` has at least one tag in it.
+ */
+bool FormatHasTags(const std::string& fmt);
+
 }  // namespace string

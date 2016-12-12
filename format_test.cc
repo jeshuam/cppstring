@@ -180,6 +180,39 @@ TEST(TestFormat, TestFormatWorksWhenSkippingTags) {
   ASSERT_STREQ("12", string::Format("{0}{2}", {1, "x", 2}).c_str());
 }
 
+TEST(TestFormatTrimTags, TestFormatTrimTagsWithNoTags) {
+  ASSERT_STREQ("blah", string::FormatTrimTags("blah").c_str());
+}
+
+TEST(TestFormatTrimTags, TestFormatTrimTagsWithSomeTags) {
+  ASSERT_STREQ("blah  blah ",
+               string::FormatTrimTags("blah {abc} blah {def}").c_str());
+}
+
+TEST(TestFormatTrimTags, TestFormatTrimTagsWithNoTagsButCurlyBrackets) {
+  ASSERT_STREQ("{{blah}}", string::FormatTrimTags("{{blah}}").c_str());
+}
+
+TEST(TestFormatTrimTags, TestFormatTrimTagsWithTagsAndEscapedBrackets) {
+  ASSERT_STREQ("{{}}", string::FormatTrimTags("{{{blah}}}").c_str());
+}
+
+TEST(TestFormatHasTags, TestFormatHasTagsWithNoTags) {
+  ASSERT_FALSE(string::FormatHasTags("blah"));
+}
+
+TEST(TestFormatHasTags, TestFormatHasTagsWithManyTags) {
+  ASSERT_TRUE(string::FormatHasTags("blah {abc} blah {def}"));
+}
+
+TEST(TestFormatHasTags, TestFormatHasTagsWithEscapedTagsButNoTags) {
+  ASSERT_FALSE(string::FormatHasTags("{{blah}}"));
+}
+
+TEST(TestFormatHasTags, TestFormatHasTagsWithEscapedTagsAndTags) {
+  ASSERT_TRUE(string::FormatHasTags("{{{blah}}}"));
+}
+
 ///
 /// Error Cases
 ///

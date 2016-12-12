@@ -232,4 +232,18 @@ std::string Format(const std::string& fmt,
       fmt, [&args](const std::string& s) { return args.at(std::stoi(s)); });
 }
 
+std::string FormatTrimTags(const std::string& fmt) {
+  return _Format(fmt, [](const std::string&) { return ""; });
+}
+
+bool FormatHasTags(const std::string& fmt) {
+  bool has_tags = false;
+  _Format(fmt, [&has_tags](const std::string&) {
+    has_tags = true;
+    return "";
+  });
+
+  return has_tags;
+}
+
 }  // namespace string

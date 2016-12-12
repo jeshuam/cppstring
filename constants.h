@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 namespace string {
 
@@ -49,5 +50,31 @@ extern const std::string kAsciiLetters;
  * `kDigits` + `kAsciiLetters` + `kPunctuation` + `kWhitespace`
  */
 extern const std::string kPrintable;
+
+// Colors.
+namespace color {
+
+// Magic color reset.
+extern const std::string kReset;
+
+// Color formats.
+extern const std::string kBold;
+extern const std::string kItalic;
+
+// Colors.
+extern const std::string kBlack;
+extern const std::string kRed;
+extern const std::string kGreen;
+extern const std::string kYellow;
+extern const std::string kBlue;
+extern const std::string kMagenta;
+extern const std::string kCyan;
+extern const std::string kWhite;
+extern const std::string kGray;
+
+// Mapping of color names --> colors.
+extern const std::unordered_map<std::string, std::string> kColorMapping;
+
+}  // namespace color
 
 }  // namespace string

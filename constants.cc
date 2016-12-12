@@ -14,4 +14,34 @@ const std::string kAsciiLetters = kAsciiLowercase + kAsciiUppercase;
 const std::string kPrintable =
     kDigits + kAsciiLetters + kPunctuation + kWhitespace;
 
+namespace color {
+
+// Magic color reset.
+const std::string kReset = "\033[0m";
+
+// Color formats.
+const std::string kBold = "\033[1m";
+const std::string kItalic = "\033[3m";
+
+// Colors.
+const std::string kBlack = "\033[30m";
+const std::string kRed = "\033[31m";
+const std::string kGreen = "\033[32m";
+const std::string kYellow = "\033[33m";
+const std::string kBlue = "\033[34m";
+const std::string kMagenta = "\033[35m";
+const std::string kCyan = "\033[36m";
+const std::string kWhite = "\033[37m";
+const std::string kGray = kBlack + kBold;
+
+// Color mapping.
+const std::unordered_map<std::string, std::string> kColorMapping = {
+    {"nc", kReset},      {"bold", kBold},   {"italic", kItalic},
+    {"black", kBlack},   {"red", kRed},     {"green", kGreen},
+    {"yellow", kYellow}, {"blue", kBlue},   {"magenta", kMagenta},
+    {"cyan", kCyan},     {"white", kWhite}, {"gray", kGray},
+};
+
+}  // namespace color
+
 }  // namespace string
