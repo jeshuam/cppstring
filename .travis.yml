@@ -3,5 +3,5 @@ before_install:
   - sudo apt-get install -y golang
 
 install: go get -u github.com/jeshuam/jbuild && go install github.com/jeshuam/jbuild
-script: ${GOPATH}/jbuild test //...
+script: ${GOPATH}/bin/jbuild test //...
 language: c++
