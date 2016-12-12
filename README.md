@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/jeshuam/cppstring.svg?branch=master)](https://travis-ci.org/jeshuam/cppstring)
+[![Documentation](https://codedocs.xyz/jeshuam/cppstring.svg)](https://codedocs.xyz/jeshuam/cppstring/)
 
 To run coverage on Windows:
 
