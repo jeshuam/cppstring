@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jeshuam/cppstring.svg?branch=master)](https://travis-ci.org/jeshuam/cppstring)
+
 To run coverage on Windows:
 
 $ jbuild -c debug --cc_compiler="cl.exe" build :string_test
