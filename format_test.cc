@@ -184,7 +184,7 @@ TEST(TestFormat, TestFormatWorksWhenSkippingTags) {
 /// Error Cases
 ///
 TEST(TestFormatMap, TestFormatMapWithMismatchedLeftBrackets) {
-  ASSERT_THROW(string::FormatMap("{", {}), std::invalid_argument);
+  ASSERT_THROW(string::FormatMap("{", {{"abc", "abc"}}), std::invalid_argument);
 }
 
 TEST(TestFormatMap, TestFormatMapWithMismatchedRightBrackets) {
@@ -193,7 +193,8 @@ TEST(TestFormatMap, TestFormatMapWithMismatchedRightBrackets) {
 }
 
 TEST(TestFormatMap, TestFormatMapWithInvalidTagContent) {
-  ASSERT_THROW(string::FormatMap("{ {}", {}), std::invalid_argument);
+  ASSERT_THROW(string::FormatMap("{ {}", {{"abc", "abc"}}),
+               std::invalid_argument);
 }
 
 TEST(TestFormatMap, TestFormatMapWithInvalidType) {
