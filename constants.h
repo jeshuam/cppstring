@@ -72,9 +72,6 @@ extern const std::string kCyan;
 extern const std::string kWhite;
 extern const std::string kGray;
 
-// Mapping of color names --> colors.
-extern const std::unordered_map<std::string, std::string> kColorMapping;
-
 }  // namespace color
 
 }  // namespace string

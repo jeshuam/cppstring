@@ -236,14 +236,14 @@ std::string FormatTrimTags(const std::string& fmt) {
   return _Format(fmt, [](const std::string&) { return ""; });
 }
 
-bool FormatHasTags(const std::string& fmt) {
-  bool has_tags = false;
-  _Format(fmt, [&has_tags](const std::string&) {
-    has_tags = true;
+bool FormatHasTag(const std::string& fmt, const std::string& tag) {
+  bool has_tag = false;
+  _Format(fmt, [&has_tag, &tag](const std::string& t) {
+    has_tag = has_tag || (t == tag);
     return "";
   });
 
-  return has_tags;
+  return has_tag;
 }
 
 }  // namespace string

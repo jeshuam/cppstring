@@ -34,14 +34,6 @@ const std::string kCyan = "\033[36m";
 const std::string kWhite = "\033[37m";
 const std::string kGray = kBlack + kBold;
 
-// Color mapping.
-const std::unordered_map<std::string, std::string> kColorMapping = {
-    {"nc", kReset},      {"bold", kBold},   {"italic", kItalic},
-    {"black", kBlack},   {"red", kRed},     {"green", kGreen},
-    {"yellow", kYellow}, {"blue", kBlue},   {"magenta", kMagenta},
-    {"cyan", kCyan},     {"white", kWhite}, {"gray", kGray},
-};
-
 }  // namespace color
 
 }  // namespace string

@@ -141,6 +141,6 @@ std::string FormatTrimTags(const std::string& fmt);
  *
  * @return     `true` iff `fmt` has at least one tag in it.
  */
-bool FormatHasTags(const std::string& fmt);
+bool FormatHasTag(const std::string& fmt, const std::string& tag);
 
 }  // namespace string

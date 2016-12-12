@@ -197,20 +197,28 @@ TEST(TestFormatTrimTags, TestFormatTrimTagsWithTagsAndEscapedBrackets) {
   ASSERT_STREQ("{{}}", string::FormatTrimTags("{{{blah}}}").c_str());
 }
 
-TEST(TestFormatHasTags, TestFormatHasTagsWithNoTags) {
-  ASSERT_FALSE(string::FormatHasTags("blah"));
+TEST(TestFormatHasTag, TestFormatHasTagWithNoTags) {
+  ASSERT_FALSE(string::FormatHasTag("blah", "tag"));
 }
 
-TEST(TestFormatHasTags, TestFormatHasTagsWithManyTags) {
-  ASSERT_TRUE(string::FormatHasTags("blah {abc} blah {def}"));
+TEST(TestFormatHasTag, TestFormatHasTagWithManyTagsButNoneMatch) {
+  ASSERT_FALSE(string::FormatHasTag("blah {abc} blah {def}", "aaa"));
 }
 
-TEST(TestFormatHasTags, TestFormatHasTagsWithEscapedTagsButNoTags) {
-  ASSERT_FALSE(string::FormatHasTags("{{blah}}"));
+TEST(TestFormatHasTag, TestFormatHasTagWithManyTagsWhichMatch) {
+  ASSERT_TRUE(string::FormatHasTag("blah {abc} blah {def}", "abc"));
 }
 
-TEST(TestFormatHasTags, TestFormatHasTagsWithEscapedTagsAndTags) {
-  ASSERT_TRUE(string::FormatHasTags("{{{blah}}}"));
+TEST(TestFormatHasTag, TestFormatHasTagWithEscapedTagsButNoTags) {
+  ASSERT_FALSE(string::FormatHasTag("{{blah}}", "blah"));
+}
+
+TEST(TestFormatHasTag, TestFormatHasTagWithEscapedTagsAndTagsButNoneMatch) {
+  ASSERT_FALSE(string::FormatHasTag("{{{blah}}}", "abc"));
+}
+
+TEST(TestFormatHasTag, TestFormatHasTagWithEscapedTagsAndTagsWhichMatch) {
+  ASSERT_TRUE(string::FormatHasTag("{{{blah}}}", "blah"));
 }
 
 ///
