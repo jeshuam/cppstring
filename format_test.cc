@@ -94,15 +94,15 @@ TEST(TestFormatMap, TestFormatMapComplexObject) {
 }
 
 TEST(TestFormatMap, TestFormatMapShowLeftBrackets) {
-  ASSERT_STREQ("{{abc", string::FormatMap("{{abc", {}).c_str());
+  ASSERT_STREQ("{{abc", string::FormatMap("{{abc", {{"abc", 0}}).c_str());
 }
 
 TEST(TestFormatMap, TestFormatMapShowRightBrackets) {
-  ASSERT_STREQ("abc}}", string::FormatMap("abc}}", {}).c_str());
+  ASSERT_STREQ("abc}}", string::FormatMap("abc}}", {{"abc", 0}}).c_str());
 }
 
 TEST(TestFormatMap, TestFormatMapShowBothBrackets) {
-  ASSERT_STREQ("{{abc}}", string::FormatMap("{{abc}}", {}).c_str());
+  ASSERT_STREQ("{{abc}}", string::FormatMap("{{abc}}", {{"abc", 0}}).c_str());
 }
 
 TEST(TestFormatMap, TestFormatMapShowMixedBrackets) {
