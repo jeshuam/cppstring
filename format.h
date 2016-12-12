@@ -38,6 +38,18 @@ PrintableAny::PrintableAny(const char t[]);
 }  // namespace internal
 
 /**
+ * The type to use as an argument to Format().
+ * @see        Format
+ */
+typedef std::vector<internal::PrintableAny> FormatListType;
+
+/**
+ * The type to use as an argument to FormatMap().
+ * @see        FormatMap
+ */
+typedef std::unordered_map<std::string, internal::PrintableAny> FormatMapType;
+
+/**
  * @brief      Create a formatted string from the given format and mapping.
  *
  * @details    The formatting language is very heavily based off Python, so get
@@ -92,9 +104,7 @@ PrintableAny::PrintableAny(const char t[]);
  *
  * @return     A string with all formatted tags substituted.
  */
-std::string FormatMap(
-    const std::string& fmt,
-    const std::unordered_map<std::string, internal::PrintableAny>& args);
+std::string FormatMap(const std::string& fmt, const FormatMapType& args);
 
 /**
  * @brief      Create a formatted string from the given format and args.
@@ -122,8 +132,7 @@ std::string FormatMap(
  *
  * @see        FormatMap
  */
-std::string Format(const std::string& fmt,
-                   const std::vector<internal::PrintableAny>& args);
+std::string Format(const std::string& fmt, const FormatListType& args);
 
 /**
  * @brief      Trim any formatting tags from the given string.

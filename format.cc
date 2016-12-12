@@ -220,14 +220,11 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 
 }  // namespace
 
-std::string FormatMap(
-    const std::string& fmt,
-    const std::unordered_map<std::string, internal::PrintableAny>& map) {
+std::string FormatMap(const std::string& fmt, const FormatMapType& map) {
   return _Format(fmt, [&map](const std::string& s) { return map.at(s); });
 }
 
-std::string Format(const std::string& fmt,
-                   const std::vector<internal::PrintableAny>& args) {
+std::string Format(const std::string& fmt, const FormatListType& args) {
   return _Format(
       fmt, [&args](const std::string& s) { return args.at(std::stoi(s)); });
 }
