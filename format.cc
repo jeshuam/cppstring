@@ -222,17 +222,19 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 
 std::string FormatMap(const std::string& fmt, const FormatMapType& map,
                       bool missing_keys_ok) {
-  return _Format(fmt, [&map, &missing_keys_ok](const std::string& s) {
-    try {
-      return map.at(s);
-    } catch (std::out_of_range& e) {
-      if (missing_keys_ok) {
-        return internal::PrintableAny("{" + s + "}");
-      }
+  return _Format(fmt,
+                 [&map, &missing_keys_ok](
+                     const std::string& s) -> const internal::PrintableAny {
+                   try {
+                     return map.at(s);
+                   } catch (std::out_of_range& e) {
+                     if (missing_keys_ok) {
+                       return "{" + s + "}";
+                     }
 
-      throw;
-    }
-  });
+                     throw;
+                   }
+                 });
 }
 
 std::string Format(const std::string& fmt, const FormatListType& args) {
