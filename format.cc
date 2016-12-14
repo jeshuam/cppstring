@@ -220,8 +220,19 @@ std::string _Format(const std::string& fmt, const TagFn& get_tag) {
 
 }  // namespace
 
-std::string FormatMap(const std::string& fmt, const FormatMapType& map) {
-  return _Format(fmt, [&map](const std::string& s) { return map.at(s); });
+std::string FormatMap(const std::string& fmt, const FormatMapType& map,
+                      bool missing_keys_ok) {
+  return _Format(fmt, [&map, &missing_keys_ok](const std::string& s) {
+    try {
+      return map.at(s);
+    } catch (std::out_of_range& e) {
+      if (missing_keys_ok) {
+        return internal::PrintableAny("{" + s + "}");
+      }
+
+      throw;
+    }
+  });
 }
 
 std::string Format(const std::string& fmt, const FormatListType& args) {

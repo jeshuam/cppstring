@@ -252,3 +252,14 @@ TEST(TestFormatMap, TestFormatMapWithVeryLongFormat) {
 
   FLAGS_cppstring_format_buffer_bytes = old_val;
 }
+
+TEST(TestFormatMap, TestFormatMapFailsWithUnrecognizedTag) {
+  ASSERT_THROW(string::FormatMap("{abc} {def}", {{"abc", "ABC"}}),
+               std::out_of_range);
+}
+
+TEST(TestFormatMap, TestFormatMapDoesNotFailsWithUnrecognizedTagIfFlagSet) {
+  ASSERT_STREQ(
+      "ABC {def}",
+      string::FormatMap("{abc} {def}", {{"abc", "ABC"}}, true).c_str());
+}

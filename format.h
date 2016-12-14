@@ -100,13 +100,16 @@ typedef std::unordered_map<std::string, internal::PrintableAny> FormatMapType;
  *
  * @param[in]  fmt   The format string.
  * @param[in]  args  The mapping to be applied to the format string.
+ * @param[in]  missing_tags_ok  When set to true, missing tags will not cause
+ *                              an exception to be thrown.
  *
  * @throws     std::invalid_argument Thrown if the format string is invalid.
  * @throws     std::out_of_range Key in the format is not in the map provided.
  *
  * @return     A string with all formatted tags substituted.
  */
-std::string FormatMap(const std::string& fmt, const FormatMapType& args);
+std::string FormatMap(const std::string& fmt, const FormatMapType& args,
+                      bool missing_tags_ok = false);
 
 /**
  * @brief      Create a formatted string from the given format and args.
